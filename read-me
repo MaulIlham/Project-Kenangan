@@ -1,0 +1,14 @@
+Antena mencakup (3 x 3) dan antenanya berada di tengah.
+
+Sample input:
+1. Jumlah antenaa
+2. lebar (n) antenna
+3. posisi antenna (3,4), (1,4) dan (3,5)
+
+diket: nAntenna, wideAntenna, pointX, pointY 
+ditanya: area yang beririsan? (dicoverage lebih dari satu antenna)?
+Jawab:
+	Antenna : 
+		1. pointX
+		2. pointY
+	Coverage
