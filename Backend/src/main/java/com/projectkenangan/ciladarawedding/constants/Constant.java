@@ -14,5 +14,4 @@ public class Constant {
     public static final String PATHIMAGEDRESSAPPAREL = "/api/dressapparell/image/%s";
     public static final String PATHIMAGE = "/image/%s";
     public static final String IMAGESOURCE = "/home/enigmacamp/Materi/github/springboot/ciladara-wedding/Backend/src/main/resources/image/%s.jpg";
-
 }
