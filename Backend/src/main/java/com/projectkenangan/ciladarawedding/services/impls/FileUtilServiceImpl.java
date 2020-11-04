@@ -24,15 +24,6 @@ public class FileUtilServiceImpl implements FileUtilService {
         String exceptionMessage=String.format(Constant.FILENOTFOUNDMESSAGE);
         try {
             Path file = storageLocation.resolve(String.format(Constant.IMAGESOURCE,filename)).normalize();
-//            if (flag==1){
-//                file = storageLocation.resolve(String.format(Constant.IMAGESOURCEDRESSAPPAREL,filename)).normalize();
-//            }else if (flag==2){
-//                file = storageLocation.resolve(String.format(Constant.IMAGESOURCEFOODBEVERAGE,filename)).normalize();
-//            }else if (flag==3){
-//                file = storageLocation.resolve(String.format(Constant.IMAGESOURCEVENUE,filename)).normalize();
-//            }else if (flag==4){
-//                file = storageLocation.resolve(String.format(Constant.IMAGESOURCEWEDDINGSERVICE,filename)).normalize();
-//            }
             Resource resource=new UrlResource(file.toUri());
             if(!resource.exists())throw new ResponseStatusException(HttpStatus.NOT_FOUND,exceptionMessage);
             return resource;
@@ -44,15 +35,6 @@ public class FileUtilServiceImpl implements FileUtilService {
     @Override
     public String uploads(String id, MultipartFile file, int flag) throws IOException {
         File upload = new File(String.format(Constant.IMAGESOURCE,id));
-//        if (flag==1){
-//            upload = new File(String.format(Constant.IMAGESOURCEDRESSAPPAREL,id));
-//        }else if (flag==2){
-//            upload = new File(String.format(Constant.IMAGESOURCEFOODBEVERAGE,id));
-//        }else if (flag==3){
-//            upload = new File(String.format(Constant.IMAGESOURCEVENUE,id));
-//        }else if (flag==4){
-//            upload = new File(String.format(Constant.IMAGESOURCEWEDDINGSERVICE,id));
-//        }
         file.transferTo(upload);
         return id;
     }
