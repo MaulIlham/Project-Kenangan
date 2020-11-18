@@ -3,14 +3,17 @@ package com.projectkenangan.ciladarawedding.services.impls;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projectkenangan.ciladarawedding.constants.Constant;
 import com.projectkenangan.ciladarawedding.entities.Beauty;
+import com.projectkenangan.ciladarawedding.entities.Image;
 import com.projectkenangan.ciladarawedding.repositories.BeautyRepository;
 import com.projectkenangan.ciladarawedding.services.BeautyService;
 import com.projectkenangan.ciladarawedding.services.FileUtilService;
+import com.projectkenangan.ciladarawedding.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,7 +22,7 @@ public class BeautyServiceImpl implements BeautyService {
     BeautyRepository beautyRepository;
 
     @Autowired
-    FileUtilService fileUtilService;
+    ImageService imageService;
 
     @Autowired
     ObjectMapper objectMapper;
@@ -35,10 +38,20 @@ public class BeautyServiceImpl implements BeautyService {
     }
 
     @Override
-    public Beauty saveData(String data, MultipartFile fileImage) throws IOException {
+    public Beauty saveData(String data, MultipartFile[] fileImage) throws IOException {
         Beauty beauty=objectMapper.readValue(data,Beauty.class);
         beauty=beautyRepository.save(beauty);
-        beauty.setImage(String.format(Constant.PATHIMAGEBEAUTY,fileUtilService.uploads(beauty.getId(),fileImage,0)));
+        List<Image> images = new ArrayList<>();
+        int num=1;
+        for (MultipartFile file: fileImage) {
+            Image image=new Image(beauty.getId());
+            image=imageService.saveDataImage(image,file,0);
+            image.setBeauty(beauty);
+            image.setName("image "+beauty.getName()+num);
+            images.add(image);
+            num++;
+        }
+        beauty.setImages(images);
         return beautyRepository.save(beauty);
     }
 

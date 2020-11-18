@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/venue")
 public class VenueController {
     @Autowired
@@ -56,12 +57,12 @@ public class VenueController {
     }
 
     @PostMapping()
-    public Venue saveDataVenue(@RequestPart MultipartFile fileImage, @RequestPart String data)throws IOException {
+    public Venue saveDataVenue(@RequestPart MultipartFile[] fileImage, @RequestPart String data)throws IOException {
         return venueService.saveData(data,fileImage);
     }
 
     @PutMapping()
-    public Venue updateDataVenue(@RequestPart MultipartFile fileImage, @RequestPart String data)throws IOException{
+    public Venue updateDataVenue(@RequestPart MultipartFile[] fileImage, @RequestPart String data)throws IOException{
         return venueService.saveData(data,fileImage);
     }
 

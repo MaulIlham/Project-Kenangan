@@ -1,8 +1,11 @@
 package com.projectkenangan.ciladarawedding.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "food_beverage")
@@ -14,17 +17,27 @@ public class FoodBeverage {
     private String name;
     private Integer price;
     private String detail;
-    private String image;
+
+    @OneToMany(mappedBy = "foodBeverage")
+    @JsonIgnoreProperties(value = {"beauty","dressApparel","foodBeverage","venue","weddingServices"})
+    private List<Image> images=new ArrayList<>();
 
     public FoodBeverage() {
     }
 
-    public FoodBeverage(String id, String name, Integer price, String detail, String image) {
+    public FoodBeverage(String id, String name, Integer price, String detail) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.detail = detail;
-        this.image = image;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     public String getId() {
@@ -57,13 +70,5 @@ public class FoodBeverage {
 
     public void setDetail(String detail) {
         this.detail = detail;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 }

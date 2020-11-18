@@ -1,5 +1,6 @@
 package com.projectkenangan.ciladarawedding.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -17,17 +18,12 @@ public class Beauty {
     private String name;
     private Integer price;
     private String detail;
-    private String image;
+
+    @OneToMany(mappedBy = "beauty")
+    @JsonIgnoreProperties(value = {"beauty","dressApparel","foodBeverage","venue","weddingServices"})
+    private List<Image> images=new ArrayList<>();
 
     public Beauty() {
-    }
-
-    public Beauty(String id, String name, Integer price, String detail, String image) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.detail = detail;
-        this.image = image;
     }
 
     public String getId() {
@@ -62,11 +58,11 @@ public class Beauty {
         this.detail = detail;
     }
 
-    public String getImage() {
-        return image;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 }

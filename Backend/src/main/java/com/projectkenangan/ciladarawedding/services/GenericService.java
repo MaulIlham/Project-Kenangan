@@ -8,6 +8,6 @@ import java.util.List;
 public interface GenericService<T> {
     public List<T> getAllData();
     public T getDataById(String id);
-    public T saveData(String data, MultipartFile fileImage) throws IOException;
+    public T saveData(String data, MultipartFile[] fileImage) throws IOException;
     public void deleteDataById(String id);
 }

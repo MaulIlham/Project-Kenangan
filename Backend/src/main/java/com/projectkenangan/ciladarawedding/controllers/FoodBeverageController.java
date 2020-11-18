@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/foodbeverage")
 public class FoodBeverageController {
     @Autowired
@@ -56,12 +57,12 @@ public class FoodBeverageController {
     }
 
     @PostMapping()
-    public FoodBeverage saveDataFoodBeverage(@RequestPart MultipartFile fileImage, @RequestPart String data)throws IOException{
+    public FoodBeverage saveDataFoodBeverage(@RequestPart MultipartFile[] fileImage, @RequestPart String data)throws IOException{
         return foodBeverageService.saveData(data,fileImage);
     }
 
     @PutMapping()
-    public FoodBeverage updateDataFoodBeverage(@RequestPart MultipartFile fileImage, @RequestPart String data)throws IOException {
+    public FoodBeverage updateDataFoodBeverage(@RequestPart MultipartFile[] fileImage, @RequestPart String data)throws IOException {
         return foodBeverageService.saveData(data,fileImage);
     }
 

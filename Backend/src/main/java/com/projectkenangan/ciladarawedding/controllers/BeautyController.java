@@ -16,9 +16,13 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/beauty")
 public class BeautyController {
     @Autowired
@@ -54,13 +58,15 @@ public class BeautyController {
                 .body(resource);
     }
 
+
+
     @PostMapping("")
-    public Beauty saveDataBeauty(@RequestPart MultipartFile fileImage, @RequestPart String data) throws IOException {
+    public Beauty saveDataBeauty(@RequestPart MultipartFile[] fileImage, @RequestPart String data) throws IOException {
         return beautyService.saveData(data,fileImage);
     }
 
     @PutMapping("")
-    public Beauty updateDataBeauty(@RequestPart MultipartFile fileImage, @RequestPart String data)throws IOException{
+    public Beauty updateDataBeauty(@RequestPart MultipartFile[] fileImage, @RequestPart String data)throws IOException{
         return beautyService.saveData(data,fileImage);
     }
 
